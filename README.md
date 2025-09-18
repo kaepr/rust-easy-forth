@@ -26,3 +26,5 @@ cargo test
 Found about [Easy Forth by Nick Morgan](https://skilldrick.github.io/easyforth/) from [Cobb Coding](https://www.youtube.com/@cobbcoding/featured) youtube channel. 
 They have a series on building forth interpreters using Rust and Go.
 
+This conference talk [Strange Loop | Concatenative programming and stack-based languages" by Douglas Creager](https://www.youtube.com/watch?v=umSuLpjFUf8) is a nice introduction to stack based languages.
+
