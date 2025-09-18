@@ -3,9 +3,9 @@
 An interpreter for a [Forth](https://en.wikipedia.org/wiki/Forth_(programming_language)) dialect written in Rust.
 
 I am following the examples in [Easy Forth by Nick Morgan](https://skilldrick.github.io/easyforth/) 
-essentially as the tests.
+as the tests.
 
-I am working on project as a way to revise Rust, and learn more about Forth.
+I am working on this project as a way to revise Rust, and learn more about Forth.
 
 Work in progress ...
 
