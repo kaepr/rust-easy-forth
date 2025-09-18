@@ -1,9 +1,12 @@
-use crate::{errors::LexerError, token::{OperatorKind, Token}};
+use crate::{
+    errors::LexerError,
+    token::{OperatorKind, Token},
+};
 
 pub struct Lexer {}
 
 impl Lexer {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Lexer {}
     }
 
@@ -21,6 +24,7 @@ impl Lexer {
             "/" => Ok(Token::Operator(OperatorKind::Divide)),
             "-" => Ok(Token::Operator(OperatorKind::Subtract)),
             "*" => Ok(Token::Operator(OperatorKind::Multiply)),
+            "." => Ok(Token::Period),
             _ => Err(LexerError::InvalidToken(source.to_string())),
         }
     }
@@ -58,10 +62,14 @@ mod tests {
         let tokens = lexer.tokenize("+ 42").unwrap();
         assert_eq!(
             tokens,
-            vec![
-                Token::Operator(OperatorKind::Add),
-                Token::Number(42),
-            ]
+            vec![Token::Operator(OperatorKind::Add), Token::Number(42),]
         );
+    }
+
+    #[test]
+    fn test_period() {
+        let lexer = Lexer::new();
+        let tokens = lexer.tokenize(".").unwrap();
+        assert_eq!(tokens, vec![Token::Period]);
     }
 }
