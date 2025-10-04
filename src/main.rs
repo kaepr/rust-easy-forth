@@ -3,8 +3,8 @@ mod eval;
 mod lexer;
 mod token;
 
-use crate::{eval::Evaluator, lexer::Lexer};
 use std::{env, fs, process};
+use {eval::Evaluator, lexer::Lexer};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -27,23 +27,29 @@ fn main() {
     let lexer = Lexer::new();
     let mut evaluator = Evaluator::new();
 
-    for line in source {
-        let tokens = lexer.tokenize(&line).unwrap_or_else(|err| {
-            eprintln!("{}", err);
-            std::process::exit(1);
-        });
+    for line in &source {
+        {
+            let tokens = lexer.tokenize(&line).unwrap_or_else(|err| {
+                eprintln!("{}", err);
+                std::process::exit(1);
+            });
 
-        let result = evaluator.eval_all(&tokens).unwrap_or_else(|err| {
-            eprintln!("{}", err);
-            std::process::exit(1);
-        });
+            let result = evaluator.eval_all(&tokens).unwrap_or_else(|err| {
+                eprintln!("{}", err);
+                std::process::exit(1);
+            });
 
-        println!(
-            "{}",
-            match result {
-                Some(t) => format!("{:?}", t),
-                None => "".to_string(),
+            if let Some(t) = result {
+                println!("{}", t);
             }
-        );
+
+            // println!(
+            //     "{}",
+            //     match result {
+            //         Some(t) => format!("{:?}", t),
+            //         None => "".to_string(),
+            //     }
+            // );
+        }
     }
 }

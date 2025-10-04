@@ -9,7 +9,7 @@ pub enum LexerError {
 }
 
 #[derive(Error, Debug, PartialEq)]
-pub enum EvaluatorError {
+pub enum EvalError {
     #[error("stack underflow")]
     StackUnderflow,
     #[error("invalid operand")]
@@ -20,4 +20,8 @@ pub enum EvaluatorError {
     UnexpectedSemicolon,
     #[error("unexpected colon")]
     UnexpectedColon,
+    #[error("definition did not start with word")]
+    InvalidDefinition,
+    #[error("no definition found")]
+    NoDefinition,
 }
