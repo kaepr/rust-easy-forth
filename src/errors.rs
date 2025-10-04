@@ -1,31 +1,23 @@
-use std::fmt;
+use thiserror::Error;
 
-#[derive(Debug, PartialEq)]
+#[derive(Error, Debug, PartialEq)]
 pub enum LexerError {
+    #[error("invalid token: {0}")]
     InvalidToken(String),
+    #[error("unexpected end of input")]
     UnexpectedEof,
 }
 
-impl fmt::Display for LexerError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            LexerError::InvalidToken(tok) => write!(f, "Invalid token: {}", tok),
-            LexerError::UnexpectedEof => write!(f, "Unexpected end of input."),
-        }
-    }
-}
-
-#[derive(Debug, PartialEq)]
+#[derive(Error, Debug, PartialEq)]
 pub enum EvaluatorError {
+    #[error("stack underflow")]
     StackUnderflow,
+    #[error("invalid operand")]
     InvalidOperand,
-}
-
-impl fmt::Display for EvaluatorError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            EvaluatorError::StackUnderflow => write!(f, "Stack underflow."),
-            EvaluatorError::InvalidOperand => write!(f, "Invalid operand."),
-        }
-    }
+    #[error("not a number")]
+    NotANumber,
+    #[error("unexpected semicolon")]
+    UnexpectedSemicolon,
+    #[error("unexpected colon")]
+    UnexpectedColon,
 }
